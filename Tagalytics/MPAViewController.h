@@ -10,4 +10,6 @@
 
 @interface MPAViewController : UIViewController
 
+- (IBAction)update:(id)sender;
+
 @end
