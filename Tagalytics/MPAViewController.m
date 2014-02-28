@@ -119,6 +119,72 @@
             NSLog(@"FAILED BRO");
         }
     }];
+    
+    [self getTopUsers];
 
 }
+
+- (void)getTopUsers {
+    
+    NSLog(@"Starting search for top users...");
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        PFQuery *userCountQuery = [PFUser query];
+        NSError *userCountError = nil;
+        NSInteger userCount = [userCountQuery countObjects:&userCountError];
+        
+        if(userCountError) {
+            NSLog(@"Error trying to count %@", [userCountError.userInfo objectForKey:@"error"]);
+            return;
+        }
+        
+        NSMutableArray *allUsers = [NSMutableArray array];
+        
+        for(int i = 0; i < (userCount/1000 + 1); i++) {
+            
+            PFQuery *userQuery = [PFUser query];
+            [userQuery setLimit:1000];
+            [userQuery setSkip:(i * 1000)];
+            
+            NSError *userQueryError = nil;
+            NSArray *userObjects = [userQuery findObjects:&userQueryError];
+            
+            if(userQueryError) {
+                NSLog(@"Error trying to get users %@", [userQueryError.userInfo objectForKey:@"error"]);
+                return;
+            }
+            
+            [allUsers addObjectsFromArray:userObjects];
+            
+        }
+        
+        NSLog(@"All users have been fetched");
+        
+        
+        for(PFUser *user in allUsers) {
+            
+            PFQuery *tagQuery = [PFQuery queryWithClassName:@"NewMarcoPolo"];
+            [tagQuery whereKey:@"sendingUser" equalTo:user];
+            [tagQuery setLimit:1000];
+            
+            NSError *tagCountError = nil;
+            NSArray *tagObjects = [tagQuery findObjects:&tagCountError];
+            
+            if(tagCountError) {
+                NSLog(@"Error trying to get users %@", [tagCountError.userInfo objectForKey:@"error"]);
+                return;
+            }
+            
+            NSLog(@"Number of tags for %@: %ld", [user objectForKey:@"fullName"], (long)tagObjects.count);
+        }
+        
+        NSLog(@"Done with top user tracking!");
+        
+        
+        
+    });
+    
+}
+
 @end
