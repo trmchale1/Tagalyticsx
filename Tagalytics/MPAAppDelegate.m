@@ -8,6 +8,7 @@
 
 #import "MPAAppDelegate.h"
 #import <Parse/Parse.h>
+#import "MPATableTopUsers.h"
 
 @implementation MPAAppDelegate
 
@@ -17,6 +18,8 @@
                   clientKey:@"tJsGYmyM25IFIQzxzvJdmI5dw3VI0NOpbxEC4sX7"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+ //  MPATableTopUsers *MPAtableTopUsers = [[MPATableTopUsers alloc] init];
     
     return YES;
 }

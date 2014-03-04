@@ -82,7 +82,7 @@
     [total_query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
         if (!error) {
             self.userContLabel.text = [NSString stringWithFormat:@"%d", count];
-         //   NSLog(@"There are currently %@ users on Tag.", self.userContLabel.text);
+        
         } else {
             NSLog(@"FAILED BRO");
         }
@@ -95,7 +95,6 @@
     [today_query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
         if (!error) {
             self.todays_signups.text = [NSString stringWithFormat:@"%d", count];
-          //  NSLog(@"Today we had %d signups", count);
         } else {
             NSLog(@"FAILED BRO");
         }
@@ -119,98 +118,8 @@
             NSLog(@"FAILED BRO");
         }
     }];
-    
-    [self getTopUsers];
 
 }
 
-- (void)getTopUsers {
-    
-    NSLog(@"Starting search for top users...");
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        PFQuery *userCountQuery = [PFUser query];
-        NSError *userCountError = nil;
-        NSInteger userCount = [userCountQuery countObjects:&userCountError];
-        
-        NSLog(@"This is the value for userCount %ld", (long)userCount);
-        
-        if(userCountError != nil) {
-            NSLog(@"Error trying to count %@", [userCountError.userInfo objectForKey:@"error"]);
-            return;
-        }
-        
-        NSMutableArray *allUsers = [NSMutableArray array];
-        
-        for(int i = 0; i < (userCount/1000 + 1); i++) {
-            
-            PFQuery *userQuery = [PFUser query];
-            [userQuery setLimit:1000];
-            [userQuery setSkip:(i * 1000)];
-            
-            NSError *userQueryError = nil;
-            NSArray *userObjects = [userQuery findObjects:&userQueryError];
-            
-            if(userQueryError) {
-                NSLog(@"Error trying to get users %@", [userQueryError.userInfo objectForKey:@"error"]);
-                return;
-            }
-            
-            [allUsers addObjectsFromArray:userObjects];
-            
-        }
-        
-        NSLog(@"All users have been fetched");
-        
-        
-        NSMutableDictionary *best_users = [NSMutableDictionary dictionary];
-        
-    
-        
-        // iterates over each user in all users
-        
-        for(PFUser *user in allUsers) {
-            
-            PFQuery *tagQuery = [PFQuery queryWithClassName:@"NewMarcoPolo"];
-            [tagQuery whereKey:@"sendingUser" equalTo:user];
-            [tagQuery setLimit:1000];
-            NSError *tagCountError = nil;
-            NSArray *tagObjects = [tagQuery findObjects:&tagCountError];
-            
-            
-            if(tagCountError) {
-                NSLog(@"Error trying to get users %@", [tagCountError.userInfo objectForKey:@"error"]);
-                return;
-            }
-            
-            [best_users setObject:[NSNumber numberWithInteger:tagObjects.count] forKey:user.objectId];
-            
-           //NSLog(@"Number of tags for %@: %ld", [user objectForKey:@"fullName"], (long)tagObjects.count);
-        
-        }
-        
-        NSArray *sortedKeys = [best_users keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [obj2 compare:obj1];
-        }];
-                               
-        NSLog(@"%@", sortedKeys);
-        
-        for(int i = 0; i < 10; i++) {
-            
-            NSString *key = sortedKeys[i];
-            for(PFUser *user in allUsers) {
-                if([user.objectId isEqualToString:key]) {
-                    NSLog(@"User #%d: %@", i+1, [user objectForKey:@"fullName"]);
-                }
-            }
-            
-        }
-               
-        NSLog(@"Done with top user tracking!");
-        
-    });
-    
-}
 
 @end

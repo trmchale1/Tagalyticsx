@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		276D28FC18C009EE0059D6E0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276D28FB18C009EE0059D6E0 /* Parse.framework */; };
+		56A42BB018C4DFD8004C6938 /* MPATableTopUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A42BAF18C4DFD8004C6938 /* MPATableTopUsers.m */; };
 		56A96E8218BD17AA00B4160B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96E8118BD17AA00B4160B /* Foundation.framework */; };
 		56A96E8418BD17AA00B4160B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96E8318BD17AA00B4160B /* CoreGraphics.framework */; };
 		56A96E8618BD17AA00B4160B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96E8518BD17AA00B4160B /* UIKit.framework */; };
@@ -45,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		276D28FB18C009EE0059D6E0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		56A42BAE18C4DFD8004C6938 /* MPATableTopUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPATableTopUsers.h; path = ../MPATableTopUsers.h; sourceTree = "<group>"; };
+		56A42BAF18C4DFD8004C6938 /* MPATableTopUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPATableTopUsers.m; path = ../MPATableTopUsers.m; sourceTree = "<group>"; };
 		56A96E7E18BD17AA00B4160B /* Tagalytics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tagalytics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A96E8118BD17AA00B4160B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		56A96E8318BD17AA00B4160B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -157,6 +160,8 @@
 				56A96E9318BD17AA00B4160B /* Main.storyboard */,
 				56A96E9618BD17AA00B4160B /* MPAViewController.h */,
 				56A96E9718BD17AA00B4160B /* MPAViewController.m */,
+				56A42BAE18C4DFD8004C6938 /* MPATableTopUsers.h */,
+				56A42BAF18C4DFD8004C6938 /* MPATableTopUsers.m */,
 				56A96E9918BD17AA00B4160B /* Images.xcassets */,
 				56A96E8818BD17AA00B4160B /* Supporting Files */,
 			);
@@ -290,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56A42BB018C4DFD8004C6938 /* MPATableTopUsers.m in Sources */,
 				56A96E8E18BD17AA00B4160B /* main.m in Sources */,
 				56A96E9218BD17AA00B4160B /* MPAAppDelegate.m in Sources */,
 				56A96E9818BD17AA00B4160B /* MPAViewController.m in Sources */,
