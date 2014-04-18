@@ -17,7 +17,6 @@
 		56A96E9218BD17AA00B4160B /* MPAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A96E9118BD17AA00B4160B /* MPAAppDelegate.m */; };
 		56A96E9518BD17AA00B4160B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A96E9318BD17AA00B4160B /* Main.storyboard */; };
 		56A96E9818BD17AA00B4160B /* MPAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A96E9718BD17AA00B4160B /* MPAViewController.m */; };
-		56A96E9A18BD17AA00B4160B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A96E9918BD17AA00B4160B /* Images.xcassets */; };
 		56A96EA118BD17AA00B4160B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96EA018BD17AA00B4160B /* XCTest.framework */; };
 		56A96EA218BD17AA00B4160B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96E8118BD17AA00B4160B /* Foundation.framework */; };
 		56A96EA318BD17AA00B4160B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96E8518BD17AA00B4160B /* UIKit.framework */; };
@@ -32,6 +31,7 @@
 		56A96EC518BD1FEE00B4160B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96EC418BD1FEE00B4160B /* Security.framework */; };
 		56A96EC718BD201900B4160B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96EC618BD201900B4160B /* StoreKit.framework */; };
 		56A96EC918BD202900B4160B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A96EC818BD202900B4160B /* SystemConfiguration.framework */; };
+		56D7400418CA91D3000546A5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56D7400318CA91D3000546A5 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,6 @@
 		56A96E9418BD17AA00B4160B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		56A96E9618BD17AA00B4160B /* MPAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPAViewController.h; sourceTree = "<group>"; };
 		56A96E9718BD17AA00B4160B /* MPAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPAViewController.m; sourceTree = "<group>"; };
-		56A96E9918BD17AA00B4160B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		56A96E9F18BD17AA00B4160B /* TagalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TagalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A96EA018BD17AA00B4160B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		56A96EA818BD17AA00B4160B /* TagalyticsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TagalyticsTests-Info.plist"; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		56A96EC418BD1FEE00B4160B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		56A96EC618BD201900B4160B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		56A96EC818BD202900B4160B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		56D7400318CA91D3000546A5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +162,7 @@
 				56A96E9718BD17AA00B4160B /* MPAViewController.m */,
 				56A42BAE18C4DFD8004C6938 /* MPATableTopUsers.h */,
 				56A42BAF18C4DFD8004C6938 /* MPATableTopUsers.m */,
-				56A96E9918BD17AA00B4160B /* Images.xcassets */,
+				56D7400318CA91D3000546A5 /* Images.xcassets */,
 				56A96E8818BD17AA00B4160B /* Supporting Files */,
 			);
 			path = Tagalytics;
@@ -242,7 +242,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MPA;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Tim McHale";
 				TargetAttributes = {
 					56A96E9E18BD17AA00B4160B = {
@@ -274,7 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56A96E9A18BD17AA00B4160B /* Images.xcassets in Resources */,
+				56D7400418CA91D3000546A5 /* Images.xcassets in Resources */,
 				56A96E8C18BD17AA00B4160B /* InfoPlist.strings in Resources */,
 				56A96E9518BD17AA00B4160B /* Main.storyboard in Resources */,
 			);
@@ -352,7 +352,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -391,7 +390,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -459,7 +457,6 @@
 		56A96EB418BD17AA00B4160B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Tagalytics.app/Tagalytics";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -482,7 +479,6 @@
 		56A96EB518BD17AA00B4160B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Tagalytics.app/Tagalytics";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

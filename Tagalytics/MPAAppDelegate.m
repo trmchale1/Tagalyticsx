@@ -17,9 +17,10 @@
     [Parse setApplicationId:@"FNluRA1a6V3ycunFLFZPdPke6KFAtYvr1lYbX8qo"
                   clientKey:@"tJsGYmyM25IFIQzxzvJdmI5dw3VI0NOpbxEC4sX7"];
     
+    [self customizeUserInterface];
+    
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
- //  MPATableTopUsers *MPAtableTopUsers = [[MPATableTopUsers alloc] init];
     
     return YES;
 }
@@ -50,5 +51,14 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+- (void) customizeUserInterface {
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.294 green:0 blue:0.51 alpha:1.0]];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+     }
 
 @end

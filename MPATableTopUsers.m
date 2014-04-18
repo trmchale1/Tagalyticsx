@@ -8,6 +8,10 @@
 
 #import "MPATableTopUsers.h"
 #import <Parse/Parse.h>
+#import "MPAViewController.h"
+
+
+
 @interface MPATableTopUsers ()
 @end
 NSArray *final_list_global;
@@ -28,6 +32,8 @@ NSArray *final_list_global;
     [super viewDidLoad];
     
     [self getTopUsers];
+    
+    NSLog(@"dateUno = %@", _dateUno);
 
 }
 
@@ -72,10 +78,17 @@ NSArray *final_list_global;
         NSError *userCountError = nil;
         NSInteger userCount = [userCountQuery countObjects:&userCountError];
         
+        // userCount is an integer that holds the number of users
+        
         if(userCountError != nil) {
             NSLog(@"Error trying to count %@", [userCountError.userInfo objectForKey:@"error"]);
             return;
         }
+        
+        // allUsers is iterated over by the loop, there probably isn't 1000
+        // users, so lets just say that that all the users are in all users
+        // held as objects (PFUSER, email, facebookID, fullname, phonenumber, pin,
+        // profile image, seenAt, username)
         
         NSMutableArray *allUsers = [NSMutableArray array];
         
@@ -95,7 +108,9 @@ NSArray *final_list_global;
             
             [allUsers addObjectsFromArray:userObjects];
             
+            
         }
+        
         
         NSLog(@"All users have been fetched");
         
@@ -105,12 +120,17 @@ NSArray *final_list_global;
         
         NSMutableArray *final_list = [[NSMutableArray array] init];
         
-        // iterates over each user in all users
+        // iterates over each user in allUsers
         
+        // The key value in this loop is array tagObjects
+        
+        // tagObjects is equal to a parse query looking for sendingUser
+        // these are counted, and held in dictionary best_users withKey being user
         for(PFUser *user in allUsers) {
             
             PFQuery *tagQuery = [PFQuery queryWithClassName:@"NewMarcoPolo"];
             [tagQuery whereKey:@"sendingUser" equalTo:user];
+//            [tagQuery whereKey:@"createdAt" equalTo:@"%@", dateUno];
             [tagQuery setLimit:1000];
             NSError *tagCountError = nil;
             NSArray *tagObjects = [tagQuery findObjects:&tagCountError];
@@ -121,32 +141,21 @@ NSArray *final_list_global;
             }
             
             [best_users setObject:[NSNumber numberWithInteger:tagObjects.count] forKey:user.objectId];
-            
-            //NSLog(@"Number of tags for %@: %ld", [user objectForKey:@"fullName"], (long)tagObjects.count);
-            
         }
         
         NSArray *sortedKeys = [best_users keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             return [obj2 compare:obj1];
         }];
         
-      //  NSLog(@"%@", sortedKeys);
-        
+        // Array sortedKeys sort the dictionary best_users
+                
         for(int i = 0; i < 10; i++) {
             
             NSString *key = sortedKeys[i];
             for(PFUser *user in allUsers) {
                 if([user.objectId isEqualToString:key]) {
                     
-                    
-                    // Final print out statement
-                    
-                  // NSLog(@"User #%d: %@", i+1, [user objectForKey:@"fullName"]);
                     [final_list addObject:[user objectForKey:@"fullName"] ];
-                    
-                    
-                    
-                    NSLog(@"Hope this works %@", final_list);
                     
                 }
             }

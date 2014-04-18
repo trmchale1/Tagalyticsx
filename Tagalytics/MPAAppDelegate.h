@@ -12,5 +12,8 @@
 @interface MPAAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property(nonatomic, retain) UIColor *tintColor;
+
+
 
 @end

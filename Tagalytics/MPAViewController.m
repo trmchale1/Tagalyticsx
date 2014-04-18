@@ -8,6 +8,7 @@
 
 #import "MPAViewController.h"
 #import <Parse/Parse.h>
+#import "MPATableTopUsers.h"
 
 
 @interface MPAViewController ()
@@ -23,14 +24,72 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSDate *today = [NSDate date];
+    NSDate *yesterday = [today dateByAddingTimeInterval: -86400.0];
+    
+    self.dateUno = yesterday;
+    self.dateDos = today;
+    
     [self update:nil];
+    
+    
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    [datePicker setDate:[NSDate date]];
+    [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    
+    UIDatePicker *datePickerDos = [[UIDatePicker alloc] init];
+    [datePickerDos setDate:[NSDate date]];
+    [datePickerDos addTarget:self action:@selector(updateTextFieldDos:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.datePickerUno setInputView:datePicker];
+    [self.datePickerDos setInputView:datePickerDos];
+    
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
 }
 
+-(void)dismissKeyboard {
+    [_datePickerUno resignFirstResponder];
+    [_datePickerDos resignFirstResponder];
+
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)updateTextField:(id)sender
+{
+    UIDatePicker *picker = (UIDatePicker*)self.datePickerUno.inputView;
+    self.datePickerUno.text = [self formatDate:picker.date];
+   
+    self.dateUno = picker.date;
+    
+    NSLog(@"dateUno = %@", self.dateUno);
+}
+
+-(void)updateTextFieldDos:(id)sender
+{
+    UIDatePicker *pickerDos = (UIDatePicker*)self.datePickerDos.inputView;
+    self.datePickerDos.text = [self formatDate:pickerDos.date];
+    
+    self.dateDos = pickerDos.date;
+    NSLog(@"dateDos = %@", _dateDos);
+}
+
+- (NSString *)formatDate:(NSDate *)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setDateFormat:@"MM'-'dd'-'yyyy"];
+    NSString *formattedDate = [dateFormatter stringFromDate:date];
+
+    return formattedDate;
 }
 
 - (IBAction)update:(id)sender {
@@ -40,7 +99,8 @@
         button = (UIButton *)sender;
     }
     
-    button.backgroundColor = [UIColor greenColor];
+    
+    button.backgroundColor = [UIColor purpleColor];
     
    // total_query is the total number of users signed up
     // today_query is the total # of users signed up today
@@ -52,31 +112,33 @@
     PFQuery *tags_today = [PFQuery queryWithClassName:@"NewMarcoPolo"];
     
     // now = todays date
+//    
+//    NSDate *now = [NSDate date];
+////    
+//    // an integer representing one 24 hr period in seconds
+//    
+//    NSTimeInterval secondsToday =  24 * 60 * 60;
+//        
+
     
-    NSDate *now = [NSDate date];
+   // NSDate *yesterday = [NSDate dateWithTimeInterval:-secondsToday sinceDate:now];
     
-    // an integer representing one 24 hr period in seconds
     
-    NSTimeInterval secondsToday =  24 * 60 * 60;
+        [today_query whereKey:@"createdAt" greaterThan:self.dateUno];
         
-    // yesterday = immediate time - 24hrs in seconds
+        [seen_today_query whereKey:@"seenAt" greaterThan:self.dateUno];
     
-    NSDate *yesterday = [NSDate dateWithTimeInterval:-secondsToday sinceDate:now];
-    
-    // print to console for programmer reference
-    
-   // NSLog(@"The value held in yesterday is %@", yesterday);
-    
-    // filter for today_query
-    
-    [today_query whereKey:@"createdAt" greaterThan:yesterday];
-    
-    [seen_today_query whereKey:@"seenAt" greaterThan:yesterday];
-    
-    [tags_today whereKey:@"createdAt" greaterThan:yesterday];
+        [tags_today whereKey:@"createdAt" greaterThan:self.dateUno];
     
     
     
+        [today_query whereKey:@"createdAt" lessThan:self.dateDos];
+    
+        [seen_today_query whereKey:@"seenAt" lessThan:self.dateDos];
+    
+        [tags_today whereKey:@"createdAt" lessThan:self.dateDos];
+    
+
     // returns total # of user signups
     
     [total_query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
@@ -120,6 +182,16 @@
     }];
 
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    MPATableTopUsers *topUsersVc = (MPATableTopUsers *)segue.destinationViewController;
+    topUsersVc.dateUno = self.dateUno;
+    topUsersVc.dateDos = self.dateDos;
+
+    
+}
+
 
 
 @end

@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MPAViewController : UIViewController
+@interface MPAViewController : UIViewController <UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *datePickerUno;
+@property (weak, nonatomic) IBOutlet UITextField *datePickerDos;
+
+@property (strong, nonatomic) NSDate *dateUno;
+@property (strong, nonatomic) NSDate *dateDos;
+
+
 
 - (IBAction)update:(id)sender;
 

@@ -12,4 +12,7 @@
 
 @property (nonatomic, strong) NSArray *final_list_global;
 
+@property (strong, nonatomic) NSDate *dateUno;
+@property (strong, nonatomic) NSDate *dateDos;
+
 @end
